@@ -10,3 +10,5 @@ export function updateNote(req,res){
 export function deleteNote(req,res){
     res.status(200).json("note deleted successfully!!");
 };
+
+
