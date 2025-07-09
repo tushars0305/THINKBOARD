@@ -7,6 +7,8 @@ export default router;
 
 router.get("/", getAllNotes);
 
+router.get("/:id", getAllNotes);
+
 router.post("/", createNote);
 
 router.put("/:id", updateNote);
