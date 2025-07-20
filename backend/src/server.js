@@ -1,11 +1,14 @@
 import express from "express"
 // const express = require("express"); // same as above one but diff syntax and type in package.json
+import cors from 'cors'
+import dotenv from "dotenv";
+
+
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "../src/config/db.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
 
-import dotenv from "dotenv";
 dotenv.config(); 
 const PORT = process.env.PORT || 5001;
 
@@ -13,6 +16,9 @@ const PORT = process.env.PORT || 5001;
 const app = express()
 
 
+app.use(cors({
+    origin:"http://localhost:5173",
+}));
 app.use(express.json());// this is middleware
 app.use(rateLimiter);
 

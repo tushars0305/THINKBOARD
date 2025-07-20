@@ -1,8 +1,8 @@
 import Note from "../models/Note.js";
 
-export async function getAllNotes(_ , res) { // _ indicated that the variable's value never get used aur read so we use this _ on the palce of variable
+export async function getAllNotes(_, res) {
   try {
-    const notes = await Note.find().sort({ createdAt: -1 }); // -1 indicate that the data will be sorted by newest first 
+    const notes = await Note.find().sort({ createdAt: -1 }); // -1 will sort in desc. order (newest first)
     res.status(200).json(notes);
   } catch (error) {
     console.error("Error in getAllNotes controller", error);
