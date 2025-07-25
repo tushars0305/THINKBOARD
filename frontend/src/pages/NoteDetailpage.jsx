@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
 
 const NoteDetailPage = () => {
-  const [note, setNote] = useState(null);
+  const [note, setNote] = useState({ title: "", content: "" });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
@@ -43,10 +43,12 @@ const NoteDetailPage = () => {
     }
   };
 
+
   const handleSave = async () => {
     if (!note.title.trim() || !note.content.trim()) {
       toast.error("Please add a title or content");
       return;
+      
     }
 
     setSaving(true);
@@ -67,6 +69,14 @@ const NoteDetailPage = () => {
     return (
       <div className="min-h-screen bg-base-200 flex items-center justify-center">
         <LoaderIcon className="animate-spin size-10" />
+      </div>
+    );
+  }
+
+  if (!note) {
+    return (
+      <div className="min-h-screen bg-base-200 flex items-center justify-center">
+        <p className="text-lg text-gray-500">Note not found.</p>
       </div>
     );
   }
@@ -96,7 +106,7 @@ const NoteDetailPage = () => {
                   type="text"
                   placeholder="Note title"
                   className="input input-bordered"
-                  value={note.title}
+                  value={note.title || ""}
                   onChange={(e) => setNote({ ...note, title: e.target.value })}
                 />
               </div>
@@ -108,7 +118,7 @@ const NoteDetailPage = () => {
                 <textarea
                   placeholder="Write your note here..."
                   className="textarea textarea-bordered h-32"
-                  value={note.content}
+                  value={note.content || ""}
                   onChange={(e) => setNote({ ...note, content: e.target.value })}
                 />
               </div>
